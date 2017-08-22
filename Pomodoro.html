@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <title></title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="HeadContainer blendColor">
+      <div class="HeadTitle1">POMODORO</div>
+    </div>
+
+    <div class="BottomContainer">
+      <div class="HeadTitle2">POMODORO</div>
+
+          <div id="compteur"><p>25:00</p></div>
+
+        <div class="SubContainer">
+          
+          <button id="start"><p>START</p></button>
+          <button id="pause"><p>PAUSE</p></button>
+          <button id="reset"><p>RESET</p></button>
+
+        </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+<script src="jquery-3.2.1.js"></script>    
+
+<script>
+    $(document).ready(function(){
+        var minutes= 00;
+       var secondes= 00;
+        $("#start").click(function(){
+           minutes = 25;
+           secondes = 00;
+           var time = setInterval(function(){
+               secondes --;
+               if (secondes < 0){
+                   minutes--;
+                   secondes = 59;
+               }
+
+               if (minutes <= 0 && secondes <=0){
+                   clearInterval(time);
+                   minutes = secondes = 0;
+               }
+                       
+                       
+               $("#compteur").html(minutes +':'+ secondes);
+           }, 1000);
+            
+
+           $("#reset").click(function(){
+               minutes= 0;
+               secondes= 0;
+               clearInterval(time);
+               $("#compteur").html(minutes +'0'+':'+'0'+ secondes);
+           });
+
+           $("#pause").click(function(){
+               clearTimeout(time);
+               $("#compteur").html(minutes +':'+ secondes);
+           });
+           
+        });
+
+    });
+
+</script>
+</html>
